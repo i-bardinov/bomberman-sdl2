@@ -18,11 +18,12 @@
    ./bomberman
    ```
 
-- CONTROL:
+- Rules is simple:
    - Menu selection using SPACE or ENTER
    - To navigate use arrows or WSAD
    - You can exit from level using ESCAPE
    - You can skip level using BACKSPACE
+   - You can pause a game using ENTER
    - You should kill all enemies and find the door in the bricks by destroying it
    - Enemies can kill you!
    - You have 200 seconds, hurry up!
