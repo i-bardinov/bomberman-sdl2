@@ -5,57 +5,35 @@ namespace bomberman
 {
     Player::Player(std::shared_ptr<SDL_Texture> texture, SDL_Renderer* renderer) : Creature(texture, renderer)
     {
-        // animation left
-        moveLeft = std::make_shared<Animation>();
-        moveLeft->addAnimationEntity(AnimationEntity(0, 0, tileSize, tileSize));
-        moveLeft->addAnimationEntity(AnimationEntity(tileSize, 0, tileSize, tileSize));
-        moveLeft->addAnimationEntity(AnimationEntity(tileSize * 2, 0, tileSize, tileSize));
-        moveLeft->setSprite(this);
-        addAnimation(moveLeft);
-        // animation right
-        moveRight = std::make_shared<Animation>();
-        moveRight->addAnimationEntity(AnimationEntity(0, tileSize, tileSize, tileSize));
-        moveRight->addAnimationEntity(AnimationEntity(tileSize, tileSize, tileSize, tileSize));
-        moveRight->addAnimationEntity(AnimationEntity(tileSize * 2, tileSize, tileSize, tileSize));
-        moveRight->setSprite(this);
-        addAnimation(moveRight);
-        // animation down
-        moveDown = std::make_shared<Animation>();
-        moveDown->addAnimationEntity(AnimationEntity(tileSize * 3, 0, tileSize, tileSize));
-        moveDown->addAnimationEntity(AnimationEntity(tileSize * 4, 0, tileSize, tileSize));
-        moveDown->addAnimationEntity(AnimationEntity(tileSize * 5, 0, tileSize, tileSize));
-        moveDown->setSprite(this);
-        addAnimation(moveDown);
-        // animation up
-        moveUp = std::make_shared<Animation>();
-        moveUp->addAnimationEntity(AnimationEntity(tileSize * 3, tileSize, tileSize, tileSize));
-        moveUp->addAnimationEntity(AnimationEntity(tileSize * 4, tileSize, tileSize, tileSize));
-        moveUp->addAnimationEntity(AnimationEntity(tileSize * 5, tileSize, tileSize, tileSize));
-        moveUp->setSprite(this);
-        addAnimation(moveUp);
+        // movement animation
+        movement = std::make_shared<Animation>();
+        movement->addAnimationEntity(AnimationEntity(0, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 1, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 2, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 3, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 4, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 5, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 6, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 7, 0, tileSize, tileSize));
+        movement->setSprite(this);
+        addAnimation(movement);
     }
 
     void Player::setMovementDirection(MovementDirection direction)
     {
         movementDirection = direction;
         setMoving(movementDirection != MovementDirection::None);
-        moveLeft->reset();
-        moveRight->reset();
-        moveUp->reset();
-        moveDown->reset();
+        movement->play();
         switch(movementDirection)
         {
             case MovementDirection::Left:
-                moveLeft->play();
+                setFlip(SDL_FLIP_HORIZONTAL);
                 break;
             case MovementDirection::Right:
-                moveRight->play();
+                setFlip(SDL_FLIP_NONE);
                 break;
-            case MovementDirection::Up:
-                moveUp->play();
-                break;
-            case MovementDirection::Down:
-                moveDown->play();
+            case MovementDirection::None:
+                movement->pause();
                 break;
             default:
                 break;

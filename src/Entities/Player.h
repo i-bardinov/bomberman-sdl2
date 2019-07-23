@@ -56,9 +56,9 @@ namespace bomberman
          */
         bool isMovingHorizontally() const;
 
-        MovementDirection movementDirection = MovementDirection::None;    // movement direction
-        const float speed = 0.2f;                                         // speed
-        std::shared_ptr<Animation> moveLeft, moveRight, moveUp, moveDown; // animations
+        MovementDirection movementDirection = MovementDirection::None; // movement direction
+        const float speed = 0.2f;                                      // speed
+        std::shared_ptr<Animation> movement;                           // movement animation
     };
 } // namespace bomberman
 

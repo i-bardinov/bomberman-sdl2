@@ -59,6 +59,11 @@ namespace bomberman
         return rect;
     }
 
+    void Object::setFlip(SDL_RendererFlip flip)
+    {
+        flipping = flip;
+    }
+
     void Object::update(const unsigned int /*delta*/) {}
 
     void Object::draw(const SDL_Rect& camera) const
@@ -73,7 +78,7 @@ namespace bomberman
                 destrinationRect.y -= camera.y;
             }
             // draw on the screen
-            SDL_RenderCopy(renderer, texture.get(), &clip, &destrinationRect);
+            SDL_RenderCopyEx(renderer, texture.get(), &clip, &destrinationRect, 0, nullptr, flipping);
         }
     }
 } // namespace bomberman

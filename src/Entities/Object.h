@@ -84,6 +84,12 @@ namespace bomberman
          */
         const SDL_Rect& getRect() const;
         /**
+         * @brief Set the Flip object
+         *
+         * @param flip - flip of texture
+         */
+        void setFlip(SDL_RendererFlip flip);
+        /**
          * @brief Update object
          *
          * @param delta - time in milliseconds
@@ -101,6 +107,7 @@ namespace bomberman
         std::shared_ptr<SDL_Texture> texture = nullptr; // SDL2 texture
         SDL_Rect rect;                                  // size and position of texture on the screen
         SDL_Rect clip;                                  // what part of texture to draw on the screen
+        SDL_RendererFlip flipping = SDL_FLIP_NONE;      // flip of texture
 
       private:
         bool isAttachedToCamera = true; // follow to camera
