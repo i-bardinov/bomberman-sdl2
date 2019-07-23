@@ -1,17 +1,44 @@
 #include <chrono>
 #include <random>
 
+#include "Const.h"
 #include "Entities/Enemy.h"
 
 namespace bomberman
 {
+    Enemy::Enemy(std::shared_ptr<SDL_Texture> texture, SDL_Renderer* renderer) : Creature(texture, renderer)
+    {
+        // movement animation
+        movement = std::make_shared<Animation>();
+        movement->addAnimationEntity(AnimationEntity(0, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 1, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 2, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 3, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 4, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 5, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 6, 0, tileSize, tileSize));
+        movement->addAnimationEntity(AnimationEntity(tileSize * 7, 0, tileSize, tileSize));
+        movement->setSprite(this);
+        addAnimation(movement);
+    }
+
     void Enemy::moveTo(const int x, const int y)
     {
         // start a moving, see update func
+        movement->play();
         setMoving(true);
         // save new position
         newPositionX = getPositionX() + x;
         newPositionY = getPositionY() + y;
+        // flip
+        if(x < 0)
+        {
+            setFlip(SDL_FLIP_HORIZONTAL);
+        }
+        else if(x > 0)
+        {
+            setFlip(SDL_FLIP_NONE);
+        }
     }
 
     void Enemy::moveToCell(std::pair<int, int> pathToCell)
@@ -71,7 +98,7 @@ namespace bomberman
         const int newPositionDiffY = getPositionY() - newPositionY;
         const char signOfX = (newPositionDiffX > 0) ? 1 : ((newPositionDiffX < 0) ? -1 : 0);
         const char signOfY = (newPositionDiffY > 0) ? 1 : ((newPositionDiffY < 0) ? -1 : 0);
-        const float posDiff = static_cast<int>(floor(baseSpeed * delta));
+        const float posDiff = static_cast<int>(floor((canAttack() ? attackSpeed : baseSpeed) * delta));
 
         prevPosDeltaX = posDiff * -signOfX;
         prevPosDeltaY = posDiff * -signOfY;
@@ -79,6 +106,7 @@ namespace bomberman
         // finish movement
         if(newPositionDiffX * signOfX <= posDiff && newPositionDiffY * signOfY <= posDiff)
         {
+            movement->pause();
             setMoving(false);
             movingToCell = false;
             setPosition(newPositionX, newPositionY);

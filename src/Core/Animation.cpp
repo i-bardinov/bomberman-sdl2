@@ -21,6 +21,9 @@ namespace bomberman
 
     void Animation::play()
     {
+        if(isPlaying)
+            return;
+
         isPlaying = true;
         time = interval;
     }

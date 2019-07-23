@@ -20,8 +20,9 @@ namespace bomberman
         Grass,
         Brick,
         Player,
-        EnemyBaloon,
-        EnemyBlue,
+        Enemy1,
+        Enemy2,
+        Enemy3,
         Bomb,
         Bang,
         Door

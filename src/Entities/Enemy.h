@@ -24,10 +24,10 @@ namespace bomberman
     {
       public:
         /**
-         * @brief Inherit constructor
+         * @brief Create Enemy
          *
          */
-        using Creature::Creature;
+        Enemy(std::shared_ptr<SDL_Texture> texture, SDL_Renderer* renderer);
         /**
          * @brief Move enemy to specified position
          *
@@ -95,8 +95,11 @@ namespace bomberman
         // AI
         AIType aiType = AIType::Wandering; // AI type
         // consts
-        const float baseSpeed = 0.07f; // speed of enemy
-        const int attackRadius = 5;    // attack radius (in cells)
+        const float baseSpeed = 0.06f;   // speed of enemy
+        const float attackSpeed = 0.09f; // speed of attack enemy
+        const int attackRadius = 4;      // attack radius (in cells)
+        // animations
+        std::shared_ptr<Animation> movement; // movement animation
     };
 } // namespace bomberman
 

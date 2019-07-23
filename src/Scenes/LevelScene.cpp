@@ -180,8 +180,10 @@ namespace bomberman
         const auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
         auto randCount = std::bind(std::uniform_int_distribution<int>(minEnemiesOnLevel, maxEnemiesOnLevel),
                                    std::mt19937(static_cast<unsigned int>(seed)));
-        auto randType = std::bind(std::uniform_int_distribution<int>(0, 2),
+        auto randType = std::bind(std::uniform_int_distribution<int>(0, 1),
                                   std::mt19937(static_cast<unsigned int>(seed)));
+        auto randTexture = std::bind(std::uniform_int_distribution<int>(0, 2),
+                                     std::mt19937(static_cast<unsigned int>(seed)));
         auto randCellX = std::bind(std::uniform_int_distribution<int>(0, tileArrayHeight - 1),
                                    std::mt19937(static_cast<unsigned int>(seed)));
         auto randCellY = std::bind(std::uniform_int_distribution<int>(0, tileArrayWidth - 1),
@@ -199,16 +201,11 @@ namespace bomberman
                 cellY = randCellY();
             }
             // spawn enemy
-            if(randType() == 0)
-            {
-                spawnEnemy(Texture::EnemyBaloon, AIType::Wandering, fieldPositionX + cellY * scaledTileSize,
-                           fieldPositionY + cellX * scaledTileSize);
-            }
-            else
-            {
-                spawnEnemy(Texture::EnemyBlue, AIType::Chasing, fieldPositionX + cellY * scaledTileSize,
-                           fieldPositionY + cellX * scaledTileSize);
-            }
+            int textureRand = randTexture();
+            spawnEnemy(textureRand == 0 ? Texture::Enemy1 :
+                                          (textureRand == 1 ? Texture::Enemy2 : Texture::Enemy3),
+                       randType() == 0 ? AIType::Wandering : AIType::Chasing,
+                       fieldPositionX + cellY * scaledTileSize, fieldPositionY + cellX * scaledTileSize);
         }
     }
 

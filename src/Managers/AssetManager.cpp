@@ -15,8 +15,9 @@ namespace bomberman
         loadTexture(renderer, Texture::Grass, "assets/grass.png");
         loadTexture(renderer, Texture::Brick, "assets/brick.png");
         loadTexture(renderer, Texture::Player, "assets/player.png");
-        loadTexture(renderer, Texture::EnemyBaloon, "assets/enemy_baloon.png");
-        loadTexture(renderer, Texture::EnemyBlue, "assets/enemy_blue.png");
+        loadTexture(renderer, Texture::Enemy1, "assets/enemy_1.png");
+        loadTexture(renderer, Texture::Enemy2, "assets/enemy_2.png");
+        loadTexture(renderer, Texture::Enemy3, "assets/enemy_3.png");
         loadTexture(renderer, Texture::Bomb, "assets/bomb.png");
         loadTexture(renderer, Texture::Bang, "assets/bang.png");
         loadTexture(renderer, Texture::Door, "assets/door.png");
