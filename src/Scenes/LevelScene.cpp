@@ -235,6 +235,14 @@ namespace bomberman
         bomb->setSize(scaledTileSize, scaledTileSize);
         bomb->setPosition(bombPositionX, bombPositionY);
         insertObject(bomb, backgroundObjectLastNumber);
+        // animation
+        auto animation = std::make_shared<Animation>();
+        animation->addAnimationEntity(AnimationEntity(0, 0, tileSize, tileSize));
+        animation->addAnimationEntity(AnimationEntity(tileSize * 1, 0, tileSize, tileSize));
+        animation->addAnimationEntity(AnimationEntity(tileSize * 2, 0, tileSize, tileSize));
+        animation->addAnimationEntity(AnimationEntity(tileSize * 3, 0, tileSize, tileSize));
+        animation->setSprite(bomb.get());
+        bomb->addAnimation(animation);
         // change to bomb
         const int bombCellX =
             round((bomb->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
@@ -243,6 +251,7 @@ namespace bomberman
         tiles[bombCellY][bombCellX] = Tile::Bomb;
         // update timer
         bombTimer = bombTimerStart;
+        animation->play();
     }
 
     void LevelScene::spawnBang(Object* object)
@@ -256,7 +265,7 @@ namespace bomberman
         // create bangs in position
         for(unsigned int i = 0; i < bangSpawnCells; i++)
         {
-            auto bang = std::make_shared<Sprite>(game->getAssetManager()->getTexture(Texture::Bang),
+            auto bang = std::make_shared<Sprite>(game->getAssetManager()->getTexture(Texture::Explosion),
                                                  game->getRenderer());
             bang->setSize(scaledTileSize, scaledTileSize);
             bang->setPosition(object->getPositionX() + bangSpawnPositions[i][0] * scaledTileSize,
@@ -269,6 +278,15 @@ namespace bomberman
             const int bangCellY =
                 round((bang->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
             tiles[bangCellY][bangCellX] = Tile::Bang;
+            // animation
+            auto animation = std::make_shared<Animation>();
+            for(int j = 1; j < 12; j++)
+            {
+                animation->addAnimationEntity(AnimationEntity(tileSize * j, 0, tileSize, tileSize));
+            }
+            animation->setSprite(bang.get());
+            bang->addAnimation(animation);
+            animation->play();
         }
         // update timer
         bangTimer = bangTimerStart;

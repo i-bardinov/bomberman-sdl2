@@ -24,7 +24,7 @@ namespace bomberman
         Enemy2,
         Enemy3,
         Bomb,
-        Bang,
+        Explosion,
         Door
     };
     /**
