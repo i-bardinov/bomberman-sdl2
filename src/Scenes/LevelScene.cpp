@@ -211,12 +211,8 @@ namespace bomberman
 
     void LevelScene::spawnBomb(Object* object)
     {
-        if(!object)
-        {
-            return;
-        }
-        // we can only have 1 bomb
-        if(bomb)
+        // we can only have 1 bomb and should have object
+        if(bomb || !object)
         {
             return;
         }
@@ -333,7 +329,7 @@ namespace bomberman
             // we can spawn a bomb by space press
             else if(event.key.keysym.scancode == SDL_SCANCODE_SPACE)
             {
-                if(isGameOver)
+                if(!isGameOver)
                 {
                     spawnBomb(player.get());
                 }

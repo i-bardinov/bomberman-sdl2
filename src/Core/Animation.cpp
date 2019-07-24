@@ -12,6 +12,12 @@ namespace bomberman
     void Animation::setSprite(Sprite* _sprite)
     {
         this->sprite = _sprite;
+
+        if(!animation.empty())
+        {
+            AnimationEntity entity = animation[0];
+            this->sprite->setClip(entity.width, entity.height, entity.positionX, entity.positionY);
+        }
     }
 
     void Animation::setAnimationInterval(const unsigned int timeInMs)
@@ -37,6 +43,7 @@ namespace bomberman
     {
         pause();
         currentEntity = 0;
+        time = 0;
     }
 
     void Animation::update(const unsigned int delta)
