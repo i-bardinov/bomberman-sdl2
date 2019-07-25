@@ -24,7 +24,10 @@ namespace bomberman
         // menu music
         menuMusic = std::make_shared<Music>(game->getAssetManager()->getMusic(MusicEnum::Level));
         menuMusic->play();
-
+        // sounds
+        gameoverSound = std::make_shared<Sound>(game->getAssetManager()->getSound(SoundEnum::Lose));
+        winSound = std::make_shared<Sound>(game->getAssetManager()->getSound(SoundEnum::Win));
+        explosionSound = std::make_shared<Sound>(game->getAssetManager()->getSound(SoundEnum::Explosion));
         // draw text
         spawnTextObjects();
         // generate tile map
@@ -290,6 +293,7 @@ namespace bomberman
             animation->setSprite(bang.get());
             bang->addAnimation(animation);
             animation->play();
+            explosionSound->play();
         }
         // update timer
         bangTimer = bangTimerStart;
@@ -310,11 +314,13 @@ namespace bomberman
         menuMusic->stop();
         if(isWin)
         {
+            winSound->play();
             game->getSceneManager()->addScene("stage", std::make_shared<StageScene>(game, stage + 1, score));
             game->getSceneManager()->activateScene("stage");
         }
         else
         {
+            gameoverSound->play();
             game->getSceneManager()->activateScene("gameover");
         }
         game->getSceneManager()->removeScene("level");

@@ -10,6 +10,7 @@
 #include "Entities/Enemy.h"
 #include "Entities/Music.h"
 #include "Entities/Player.h"
+#include "Entities/Sound.h"
 #include "Entities/Text.h"
 #include "Scenes/Scene.h"
 
@@ -106,6 +107,9 @@ namespace bomberman
         const int scoreRewardForStage = 1000;
 
         std::shared_ptr<Music> menuMusic = nullptr;                       // menu music
+        std::shared_ptr<Sound> gameoverSound = nullptr;                   // game over sound
+        std::shared_ptr<Sound> winSound = nullptr;                        // win sound
+        std::shared_ptr<Sound> explosionSound = nullptr;                  // explosion sound
         std::shared_ptr<Text> timerNumber = nullptr;                      // timer
         std::shared_ptr<Text> scoreNumber = nullptr;                      // score
         std::shared_ptr<Player> player = nullptr;                         // player
