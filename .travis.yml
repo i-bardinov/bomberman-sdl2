@@ -1,0 +1,37 @@
+# Enable C++ support
+language: cpp
+notifications:
+  email: false
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq cppcheck
+  - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev
+
+before_script:
+- mkdir build && cd build
+- cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install
+
+script:
+- cmake --build . --target install
+
+matrix:
+  include:
+
+  - name: "Linux gcc"
+    os: linux
+    dist: xenial
+    compiler: gcc
+
+  - name: "Linux clang"
+    os: linux
+    dist: xenial
+    compiler: clang
+
+  - name: "MacOS clang"
+    os: osx
+    osx_image: xcode10
+    compiler: clang
+
+  - name: "Windows"
+    os: windows
