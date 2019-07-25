@@ -3,7 +3,8 @@
 
 namespace bomberman
 {
-    Player::Player(std::shared_ptr<SDL_Texture> texture, SDL_Renderer* renderer) : Creature(texture, renderer)
+    Player::Player(std::shared_ptr<SDL_Texture> _texture, SDL_Renderer* _renderer)
+        : Creature(_texture, _renderer)
     {
         // movement animation
         movement = std::make_shared<Animation>();
