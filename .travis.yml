@@ -21,12 +21,9 @@ addons:
       - sdl2_ttf
       - sdl2_mixer
 
-before:
-  script:
-    - mkdir build && cd build
-    - cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install
-
 script:
+  - mkdir build && cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install
   - cmake --build . --target install
 
 matrix:
