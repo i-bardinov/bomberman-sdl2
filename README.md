@@ -1,9 +1,9 @@
-# Instructions for Bomberman
+# Bomberman
 
 ## Status:
-| Linux GCC | Linux Clang | MacOS | Windows |
-|-----------|-------------|-------|---------|
-| [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/1)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/2)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/3)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/4)](https://travis-ci.org/i-bardinov/bomberman-sdl2) |
+| Linux GCC | Linux Clang | MacOS |
+|-----------|-------------|-------|
+| [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/1)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/2)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/3)](https://travis-ci.org/i-bardinov/bomberman-sdl2) |
 
 ## Build:
 - Install `SDL2, SDL2_image, SDL2_ttf, SDL2_mixer`.

@@ -4,39 +4,42 @@ notifications:
   email: false
 
 addons:
-  apt_packages:
-    - cmake
-    - libsdl2-dev
-    - libsdl2-image-dev
-    - libsdl2-ttf-dev
-    - libsdl2-mixer-dev
-    - libegl1-mesa-dev
-    - libgles2-mesa-dev
+  apt:
+    packages:
+      - cmake
+      - libsdl2-dev
+      - libsdl2-image-dev
+      - libsdl2-ttf-dev
+      - libsdl2-mixer-dev
+      - libegl1-mesa-dev
+      - libgles2-mesa-dev
+  homebrew:
+    packages:
+      - cmake
+      - sdl2
+      - sdl2_image
+      - sdl2_ttf
+      - sdl2_mixer
 
-before_script:
-- mkdir build && cd build
-- cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install
+before:
+  script:
+    - mkdir build && cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install
 
 script:
-- cmake --build . --target install
+  - cmake --build . --target install
 
 matrix:
   include:
-
-  - name: "Linux gcc"
-    os: linux
-    dist: xenial
-    compiler: gcc
-
-  - name: "Linux clang"
-    os: linux
-    dist: xenial
-    compiler: clang
-
-  - name: "MacOS clang"
-    os: osx
-    osx_image: xcode10
-    compiler: clang
-
-  - name: "Windows"
-    os: windows
+    - name: "Linux gcc"
+      os: linux
+      dist: bionic
+      compiler: gcc
+    - name: "Linux clang"
+      os: linux
+      dist: bionic
+      compiler: clang
+    - name: "MacOS clang"
+      os: osx
+      osx_image: xcode10.2
+      compiler: clang
