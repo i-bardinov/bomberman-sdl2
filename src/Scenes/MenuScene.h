@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <memory>
 
+#include "Entities/Music.h"
 #include "Entities/Text.h"
 #include "Scenes/Scene.h"
 
@@ -34,6 +35,16 @@ namespace bomberman
          */
         MenuScene(Game* game);
         /**
+         * @brief Called when scene was activated
+         *
+         */
+        virtual void onEnter() override;
+        /**
+         * @brief Called when scene was deactivated
+         *
+         */
+        virtual void onExit() override;
+        /**
          * @brief Trigger on SDL2 event if scene is active
          *
          * @param event - SDL2 event
@@ -54,6 +65,7 @@ namespace bomberman
 
         std::shared_ptr<Text> startText = nullptr;      // menu start
         std::shared_ptr<Text> exitText = nullptr;       // menu exit
+        std::shared_ptr<Music> menuMusic = nullptr;     // menu music
         MenuItem currentSelectedMenu = MenuItem::Start; // current selected menu
 
         // const colors for menu selection

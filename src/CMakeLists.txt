@@ -8,6 +8,9 @@ include_directories(${SDL2_TTF_INCLUDE_DIR})
 find_package(SDL2_IMAGE REQUIRED)
 include_directories(${SDL2_IMAGE_INCLUDE_DIR})
 
+find_package(SDL2_MIXER REQUIRED)
+include_directories(${SDL2_MIXER_INCLUDE_DIR})
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 # Sources
@@ -29,6 +32,7 @@ set(
     ${CMAKE_CURRENT_SOURCE_DIR}/Entities/Creature.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Entities/Enemy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Entities/Player.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Entities/Music.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Util/Pathfinding.cpp
 )
 
@@ -36,10 +40,12 @@ add_executable(${PROJECT_NAME}
     ${SOURCES}
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(
+    ${PROJECT_NAME}
     ${SDL2_LIBRARY}
     ${SDL2_TTF_LIBRARIES}
     ${SDL2_IMAGE_LIBRARIES}
+    ${SDL2_MIXER_LIBRARY}
 )
 
 # Install 

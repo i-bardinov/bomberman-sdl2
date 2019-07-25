@@ -8,6 +8,7 @@
 
 #include "Const.h"
 #include "Entities/Enemy.h"
+#include "Entities/Music.h"
 #include "Entities/Player.h"
 #include "Entities/Text.h"
 #include "Scenes/Scene.h"
@@ -104,6 +105,7 @@ namespace bomberman
         const int scoreRewardForKill = 200;
         const int scoreRewardForStage = 1000;
 
+        std::shared_ptr<Music> menuMusic = nullptr;                       // menu music
         std::shared_ptr<Text> timerNumber = nullptr;                      // timer
         std::shared_ptr<Text> scoreNumber = nullptr;                      // score
         std::shared_ptr<Player> player = nullptr;                         // player

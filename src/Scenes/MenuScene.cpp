@@ -70,6 +70,18 @@ namespace bomberman
         addObject(exitText);
 
         game->getSceneManager()->addScene("gameover", std::make_shared<GameOverScene>(game));
+        // menu music
+        menuMusic = std::make_shared<Music>(game->getAssetManager()->getMusic(MusicEnum::MainMenu));
+    }
+
+    void MenuScene::onEnter()
+    {
+        menuMusic->play();
+    }
+
+    void MenuScene::onExit()
+    {
+        menuMusic->stop();
     }
 
     void MenuScene::onEvent(const SDL_Event& event)

@@ -1,4 +1,5 @@
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
 #include <iostream>
@@ -33,6 +34,13 @@ namespace bomberman
             return;
         }
 
+        // let's init SDL2 Mixer
+        if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+        {
+            std::cout << "Mix_OpenAudio Error: " << Mix_GetError() << std::endl;
+            return;
+        }
+
         // create a window
         window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                   windowWidth, windowHeight, SDL_WINDOW_SHOWN);
@@ -63,6 +71,7 @@ namespace bomberman
         SDL_DestroyRenderer(renderer);
 
         // SDL2 finish
+        Mix_CloseAudio();
         IMG_Quit();
         TTF_Quit();
         SDL_Quit();

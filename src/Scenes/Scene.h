@@ -54,6 +54,16 @@ namespace bomberman
          */
         void setCamera(const int x, const int y);
         /**
+         * @brief Called when scene become activated
+         *
+         */
+        virtual void onEnter();
+        /**
+         * @brief CAlled when scene become deactivated
+         *
+         */
+        virtual void onExit();
+        /**
          * @brief Trigger on SDL2 event if scene is active
          *
          * @param event - SDL2 event

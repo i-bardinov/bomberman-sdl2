@@ -21,6 +21,13 @@ namespace bomberman
         loadTexture(renderer, Texture::Bomb, "assets/bomb.png");
         loadTexture(renderer, Texture::Explosion, "assets/explosion.png");
         loadTexture(renderer, Texture::Door, "assets/door.png");
+        // load music
+        loadMusic(MusicEnum::MainMenu, "assets/main_theme.ogg");
+        loadMusic(MusicEnum::Level, "assets/level.ogg");
+        // load sounds
+        loadSound(SoundEnum::Win, "assets/win.wav");
+        loadSound(SoundEnum::Lose, "assets/lose.wav");
+        loadSound(SoundEnum::Explosion, "assets/explosion.wav");
     }
 
     std::shared_ptr<TTF_Font> AssetManager::getFont() const
@@ -31,6 +38,16 @@ namespace bomberman
     std::shared_ptr<SDL_Texture> AssetManager::getTexture(Texture texture)
     {
         return textures[texture];
+    }
+
+    std::shared_ptr<Mix_Music> AssetManager::getMusic(MusicEnum music)
+    {
+        return musics[music];
+    }
+
+    std::shared_ptr<Mix_Chunk> AssetManager::getSound(SoundEnum sound)
+    {
+        return sounds[sound];
     }
 
     void AssetManager::loadFont()
@@ -50,6 +67,24 @@ namespace bomberman
         if(!textures[texture])
         {
             std::cout << "IMG_LoadTexture Error: " << IMG_GetError() << std::endl;
+        }
+    }
+
+    void AssetManager::loadMusic(MusicEnum music, const std::string& filePath)
+    {
+        musics[music] = std::shared_ptr<Mix_Music>(Mix_LoadMUS(filePath.c_str()), Mix_FreeMusic);
+        if(!musics[music])
+        {
+            std::cout << "loadMusic Error: " << Mix_GetError() << std::endl;
+        }
+    }
+
+    void AssetManager::loadSound(SoundEnum sound, const std::string& filePath)
+    {
+        sounds[sound] = std::shared_ptr<Mix_Chunk>(Mix_LoadWAV(filePath.c_str()), Mix_FreeChunk);
+        if(!sounds[sound])
+        {
+            std::cout << "loadSound Error: " << Mix_GetError() << std::endl;
         }
     }
 } // namespace bomberman

@@ -34,6 +34,10 @@ namespace bomberman
         camera.y = y;
     }
 
+    void Scene::onEnter() {}
+
+    void Scene::onExit() {}
+
     void Scene::onEvent(const SDL_Event& /*event*/) {}
 
     void Scene::update(const unsigned int delta)

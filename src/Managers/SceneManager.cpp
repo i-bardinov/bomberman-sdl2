@@ -24,7 +24,12 @@ namespace bomberman
         const auto it = scenes.find(name);
         if(it != scenes.end())
         {
+            if(currentScene)
+            {
+                currentScene->onExit();
+            }
             currentScene = it->second;
+            currentScene->onEnter();
         }
         else
         {
@@ -40,6 +45,7 @@ namespace bomberman
         {
             if(it->second == currentScene)
             {
+                currentScene->onExit();
                 currentScene = nullptr;
             }
             // add to the queue for later delete on update

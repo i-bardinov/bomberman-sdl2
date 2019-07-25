@@ -21,6 +21,9 @@ namespace bomberman
         const float scale =
             (game->getWindowHeight() - fieldPositionY) / static_cast<float>(tileArrayHeight * tileSize);
         scaledTileSize = static_cast<int>(round(scale * tileSize));
+        // menu music
+        menuMusic = std::make_shared<Music>(game->getAssetManager()->getMusic(MusicEnum::Level));
+        menuMusic->play();
 
         // draw text
         spawnTextObjects();
@@ -304,6 +307,7 @@ namespace bomberman
 
     void LevelScene::finish() const
     {
+        menuMusic->stop();
         if(isWin)
         {
             game->getSceneManager()->addScene("stage", std::make_shared<StageScene>(game, stage + 1, score));
@@ -318,12 +322,14 @@ namespace bomberman
 
     void LevelScene::gameOver()
     {
+        menuMusic->stop();
         gameOverTimer = gameOverTimerStart;
         isGameOver = true;
     }
 
     void LevelScene::exit() const
     {
+        menuMusic->stop();
         game->getSceneManager()->activateScene("menu");
         game->getSceneManager()->removeScene("level");
     }
@@ -342,7 +348,9 @@ namespace bomberman
             // we should go to main menu by Escape key
             if(event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
             {
-                exit();
+                gameOver();
+                isWin = false;
+                gameOverTimer = winTimerStart;
             }
             // we can spawn a bomb by space press
             else if(event.key.keysym.scancode == SDL_SCANCODE_SPACE)
@@ -356,6 +364,14 @@ namespace bomberman
             else if(event.key.keysym.scancode == SDL_SCANCODE_RETURN)
             {
                 isPaused = !isPaused;
+                if(isPaused)
+                {
+                    menuMusic->pause();
+                }
+                else
+                {
+                    menuMusic->resume();
+                }
             }
             // stage complete cheat
             else if(event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
@@ -414,14 +430,20 @@ namespace bomberman
         }
 
         // finish level if level timer is 0
-        if(levelTimer <= 0)
+        if(levelTimer <= 0 && !isGameOver)
         {
-            finish();
+            gameOver();
+            isWin = false;
+            gameOverTimer = winTimerStart;
         }
     }
 
     void LevelScene::updateLevelTimer()
     {
+        if(levelTimer < 0)
+        {
+            return;
+        }
         levelTimerDelta = 0;
         const int timeInSec = static_cast<int>(levelTimer / 1000.0f);
         std::string timeString = std::to_string(timeInSec);
