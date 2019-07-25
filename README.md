@@ -6,14 +6,14 @@
 | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/1)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/2)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/3)](https://travis-ci.org/i-bardinov/bomberman-sdl2) |
 
 ## Build:
-- Install `SDL2, SDL2_image, SDL2_ttf, SDL2_mixer`.
+- Install `CMake, SDL2, SDL2_image, SDL2_ttf, SDL2_mixer`.
   - MacOS:
     ```sh
-    brew install SDL2 SDL2_image SDL2_ttf SDL2_mixer
+    brew install cmake SDL2 SDL2_image SDL2_ttf SDL2_mixer
     ```
   - Ubuntu:
     ```sh
-    sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev
+    sudo apt install cmake libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev libsdl2-mixer-dev
     ```
 
 - Build Bomberman SDL2
