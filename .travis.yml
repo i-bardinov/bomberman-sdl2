@@ -30,11 +30,11 @@ matrix:
   include:
     - name: "Linux gcc"
       os: linux
-      dist: bionic
+      dist: xenial
       compiler: gcc
     - name: "Linux clang"
       os: linux
-      dist: bionic
+      dist: xenial
       compiler: clang
     - name: "MacOS clang"
       os: osx
