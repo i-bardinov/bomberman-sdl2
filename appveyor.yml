@@ -53,6 +53,34 @@ build_script:
   - |-
     cd %APPVEYOR_BUILD_FOLDER%
     mkdir build && cd build
-    cmake -DCMAKE_PREFIX_PATH="%PREFIX%" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install -G "Visual Studio 15 2017" ..
+    cmake -DCMAKE_PREFIX_PATH="%PREFIX%" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=C:\bomberman -G "Visual Studio 15 2017" ..
     cd ..
     cmake --build build --target install
+  # Add needed libs
+  - |-
+    copy %PREFIX%\lib\SDL2.dll C:\bomberman
+    copy %PREFIX%\lib\SDL2_image.dll C:\bomberman
+    copy %PREFIX%\lib\SDL2_ttf.dll C:\bomberman
+    copy %PREFIX%\lib\libfreetype-6.dll C:\bomberman
+    copy %PREFIX%\lib\zlib1.dll C:\bomberman
+    copy %PREFIX%\lib\libjpeg-9.dll C:\bomberman
+    copy %PREFIX%\lib\libpng16-16.dll C:\bomberman
+    copy %PREFIX%\lib\libtiff-5.dll C:\bomberman
+    copy %PREFIX%\lib\libwebp-7.dll C:\bomberman
+    copy %PREFIX%\lib\libFLAC-8.dll C:\bomberman
+    copy %PREFIX%\lib\libmodplug-1.dll C:\bomberman
+    copy %PREFIX%\lib\libmpg123-0.dll C:\bomberman
+    copy %PREFIX%\lib\libogg-0.dll C:\bomberman
+    copy %PREFIX%\lib\libopus-0.dll C:\bomberman
+    copy %PREFIX%\lib\libopusfile-0.dll C:\bomberman
+    copy %PREFIX%\lib\libvorbis-0.dll C:\bomberman
+    copy %PREFIX%\lib\libvorbisfile-3.dll C:\bomberman
+    copy %PREFIX%\lib\SDL2_mixer.dll C:\bomberman
+  # Create package
+  - if "%APPVEYOR_REPO_TAG%"=="true" set PACKAGE=bomberman-%APPVEYOR_REPO_TAG_NAME%-win32.zip
+  - if "%APPVEYOR_REPO_TAG%"=="false" set PACKAGE=bomberman-%APPVEYOR_BUILD_VERSION%.zip
+
+  - |-
+    cd C:\
+    7z a %PACKAGE% bomberman >nul
+    appveyor PushArtifact %PACKAGE%
