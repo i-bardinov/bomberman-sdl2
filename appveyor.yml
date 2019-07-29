@@ -1,7 +1,10 @@
 version: '{branch}.{build}'
 image: Visual Studio 2017
 clone_depth: 1
-platform: x64
+platform: 
+  - x64
+configuration:
+  - Release
 cache:
   - c:\usr
 
