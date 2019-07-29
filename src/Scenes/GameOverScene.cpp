@@ -11,9 +11,11 @@ namespace bomberman
         // game over text
         auto gameOverText =
             std::make_shared<Text>(game->getAssetManager()->getFont(), game->getRenderer(), "GAME OVER");
-        gameOverText->setSize(game->getWindowWidth() / 3.0f, game->getWindowHeight() / 20.0f);
-        gameOverText->setPosition(game->getWindowWidth() / 2 - gameOverText->getWidth() / 2,
-                                  game->getWindowHeight() / 2 - gameOverText->getHeight() / 2);
+        gameOverText->setSize(static_cast<int>(game->getWindowWidth() / 3.0f),
+                              static_cast<int>(game->getWindowHeight() / 20.0f));
+        gameOverText->setPosition(
+            static_cast<int>(game->getWindowWidth() / 2.0f - gameOverText->getWidth() / 2.0f),
+            static_cast<int>(game->getWindowHeight() / 2.0f - gameOverText->getHeight() / 2.0f));
         addObject(gameOverText);
     }
 

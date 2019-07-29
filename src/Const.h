@@ -14,8 +14,8 @@ enum class Tile
     Bang
 };
 
-const unsigned int playerStartX = 1; // player start position X on tilemap
-const unsigned int playerStartY = 1; // player start position Y on tilemap
+const int playerStartX = 1; // player start position X on tilemap
+const int playerStartY = 1; // player start position Y on tilemap
 
 const unsigned int brickSpawnRandomize = 10; // less value => more bricks
 const unsigned int doorSpawnRandomize = 10;  // less value => door is far

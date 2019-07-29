@@ -44,8 +44,8 @@ namespace bomberman
 
     void LevelScene::spawnTextObjects()
     {
-        const int fontWidth = static_cast<float>(game->getWindowWidth() / 32.0f);
-        const int fontHeight = static_cast<float>(game->getWindowHeight() / 30.0f);
+        const int fontWidth = static_cast<int>(game->getWindowWidth() / 32.0f);
+        const int fontHeight = static_cast<int>(game->getWindowHeight() / 30.0f);
         // timer text
         auto timerText =
             std::make_shared<Text>(game->getAssetManager()->getFont(), game->getRenderer(), "TIME");
@@ -68,9 +68,10 @@ namespace bomberman
         std::string scoreText = std::to_string(score);
         scoreNumber =
             std::make_shared<Text>(game->getAssetManager()->getFont(), game->getRenderer(), scoreText);
-        scoreNumber->setSize(fontWidth * scoreText.size(), fontHeight);
-        scoreNumber->setPosition(game->getWindowWidth() / 2.0f - scoreNumber->getWidth() / 2.0f,
-                                 timerText->getPositionY());
+        scoreNumber->setSize(fontWidth * static_cast<int>(scoreText.size()), fontHeight);
+        scoreNumber->setPosition(
+            static_cast<int>(game->getWindowWidth() / 2.0f - scoreNumber->getWidth() / 2.0f),
+            timerText->getPositionY());
         scoreNumber->attachToCamera(false);
         addObject(scoreNumber);
         backgroundObjectLastNumber++;
@@ -79,7 +80,7 @@ namespace bomberman
         std::string stageTextConv = "STAGE " + std::to_string(stage);
         auto stageText =
             std::make_shared<Text>(game->getAssetManager()->getFont(), game->getRenderer(), stageTextConv);
-        stageText->setSize(fontWidth * stageTextConv.size(), fontHeight);
+        stageText->setSize(fontWidth * static_cast<int>(stageTextConv.size()), fontHeight);
         stageText->setPosition(game->getWindowWidth() - 30 - stageText->getWidth(),
                                timerText->getPositionY());
         stageText->attachToCamera(false);
@@ -95,9 +96,9 @@ namespace bomberman
                                    std::mt19937(static_cast<unsigned int>(seed)));
 
         // iterate every tile
-        for(unsigned int i = 0; i < tileArrayHeight; i++)
+        for(int i = 0; i < static_cast<int>(tileArrayHeight); i++)
         {
-            for(unsigned int j = 0; j < tileArrayWidth; j++)
+            for(int j = 0; j < static_cast<int>(tileArrayWidth); j++)
             {
                 tiles[i][j] = baseTiles[i][j];
                 // generate random bricks
@@ -251,10 +252,10 @@ namespace bomberman
         animation->setSprite(bomb.get());
         bomb->addAnimation(animation);
         // change to bomb
-        const int bombCellX =
-            round((bomb->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
-        const int bombCellY =
-            round((bomb->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
+        const int bombCellX = static_cast<int>(
+            round((bomb->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize)));
+        const int bombCellY = static_cast<int>(
+            round((bomb->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize)));
         tiles[bombCellY][bombCellX] = Tile::Bomb;
         // update timer
         bombTimer = bombTimerStart;
@@ -264,10 +265,10 @@ namespace bomberman
     void LevelScene::spawnBang(Object* object)
     {
         // change to grass
-        const int bombCellX =
-            round((bomb->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
-        const int bombCellY =
-            round((bomb->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
+        const int bombCellX = static_cast<int>(
+            round((bomb->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize)));
+        const int bombCellY = static_cast<int>(
+            round((bomb->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize)));
         tiles[bombCellY][bombCellX] = Tile::Grass;
         // create bangs in position
         for(unsigned int i = 0; i < bangSpawnCells; i++)
@@ -280,14 +281,14 @@ namespace bomberman
             addObject(bang);
             bangs.push_back(bang);
             // change to bang
-            const int bangCellX =
-                round((bang->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
-            const int bangCellY =
-                round((bang->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
+            const int bangCellX = static_cast<int>(
+                round((bang->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize)));
+            const int bangCellY = static_cast<int>(
+                round((bang->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize)));
             tiles[bangCellY][bangCellX] = Tile::Bang;
             // animation
             auto animation = std::make_shared<Animation>();
-            for(int j = 1; j < 12; j++)
+            for(unsigned int j = 1; j < 12; j++)
             {
                 animation->addAnimationEntity(AnimationEntity(tileSize * j, 0, tileSize, tileSize));
             }
@@ -487,10 +488,10 @@ namespace bomberman
             {
                 removeObject(bang);
                 // change to grass
-                const int bangCellX =
-                    round((bang->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
-                const int bangCellY =
-                    round((bang->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
+                const int bangCellX = static_cast<int>(
+                    round((bang->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize)));
+                const int bangCellY = static_cast<int>(
+                    round((bang->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize)));
                 tiles[bangCellY][bangCellX] = baseTiles[bangCellY][bangCellX];
             }
             bangs.clear();
@@ -601,7 +602,7 @@ namespace bomberman
         }
         // consts for camera checking
         const int screenStart = fieldPositionX;
-        const int screenFinish = fieldPositionX + scaledTileSize * tileArrayWidth;
+        const int screenFinish = fieldPositionX + scaledTileSize * static_cast<int>(tileArrayWidth);
         const int screenWidthHalf = game->getWindowWidth() / 2;
         int cameraPositionX = player->getPositionX();
         // check borders of screen
@@ -625,7 +626,9 @@ namespace bomberman
     {
         std::string scoreText = std::to_string(score);
         scoreNumber->setText(scoreText);
-        scoreNumber->setSize(timerNumber->getWidth() / 3.0f * scoreText.size(), scoreNumber->getHeight());
+        scoreNumber->setSize(static_cast<int>(timerNumber->getWidth() / 3.0f) *
+                                 static_cast<int>(scoreText.size()),
+                             scoreNumber->getHeight());
         scoreNumber->setPosition(game->getWindowWidth() / 2 - scoreNumber->getWidth() / 2,
                                  scoreNumber->getPositionY());
     }
@@ -698,8 +701,8 @@ namespace bomberman
             {
                 // set width to smaller size
                 SDL_Rect playerRect = player->getRect();
-                playerRect.w = playerRect.w * 0.2;
-                playerRect.h = playerRect.h * 0.2;
+                playerRect.w = static_cast<int>(playerRect.w * 0.2);
+                playerRect.h = static_cast<int>(playerRect.h * 0.2);
                 if(isCollisionDetected(playerRect, enemy->getRect()))
                 {
                     // player killed by enemy
@@ -754,8 +757,8 @@ namespace bomberman
             while(itEnemies != enemies.end())
             {
                 SDL_Rect enemyRect = (*itEnemies)->getRect();
-                enemyRect.w = enemyRect.w * 0.2;
-                enemyRect.h = enemyRect.h * 0.2;
+                enemyRect.w = static_cast<int>(enemyRect.w * 0.2);
+                enemyRect.h = static_cast<int>(enemyRect.h * 0.2);
                 if(isCollisionDetected(enemyRect, bang->getRect()))
                 {
                     removeObject(*itEnemies);
@@ -772,8 +775,8 @@ namespace bomberman
             if(player != nullptr)
             {
                 SDL_Rect playerRect = player->getRect();
-                playerRect.w = playerRect.w * 0.2;
-                playerRect.h = playerRect.h * 0.2;
+                playerRect.w = static_cast<int>(playerRect.w * 0.2f);
+                playerRect.h = static_cast<int>(playerRect.h * 0.2f);
                 if(isCollisionDetected(playerRect, bang->getRect()))
                 {
                     removeObject(player);
@@ -805,8 +808,8 @@ namespace bomberman
         if(door == nullptr)
         {
             // left bricks count
-            int bricksCount = std::count_if(collisions.begin(), collisions.end(),
-                                            [](auto collision) { return collision.first == Tile::Brick; });
+            long bricksCount = std::count_if(collisions.begin(), collisions.end(),
+                                             [](auto collision) { return collision.first == Tile::Brick; });
             // random for door spawn
             const auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
             auto randDoor = std::bind(std::uniform_int_distribution<int>(0, doorSpawnRandomize),
@@ -818,10 +821,10 @@ namespace bomberman
             }
         }
         // change brick to grass and remove it
-        const int brickCellX =
-            round((brick->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
-        const int brickCellY =
-            round((brick->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
+        const int brickCellX = static_cast<int>(
+            round((brick->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize)));
+        const int brickCellY = static_cast<int>(
+            round((brick->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize)));
         tiles[brickCellY][brickCellX] = Tile::Grass;
         removeObject(brick);
     }
@@ -836,14 +839,14 @@ namespace bomberman
             return;
         }
         // get cells of creatures by their position
-        const int playerCellX =
-            round((player->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
-        const int playerCellY =
-            round((player->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
-        const int enemyCellX =
-            round((enemy->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize));
-        const int enemyCellY =
-            round((enemy->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize));
+        const int playerCellX = static_cast<int>(
+            round((player->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize)));
+        const int playerCellY = static_cast<int>(
+            round((player->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize)));
+        const int enemyCellX = static_cast<int>(
+            round((enemy->getPositionX() - fieldPositionX) / static_cast<float>(scaledTileSize)));
+        const int enemyCellY = static_cast<int>(
+            round((enemy->getPositionY() - fieldPositionY) / static_cast<float>(scaledTileSize)));
 
         // Source is the left-most bottom-most corner
         std::pair<unsigned int, unsigned int> src = std::make_pair(enemyCellY, enemyCellX);

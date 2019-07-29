@@ -103,8 +103,8 @@ namespace bomberman
         const int gameOverTimerStart = 1000;
         const int winTimerStart = 200;
         // const for score
-        const int scoreRewardForKill = 200;
-        const int scoreRewardForStage = 1000;
+        const unsigned int scoreRewardForKill = 200;
+        const unsigned int scoreRewardForStage = 1000;
 
         std::shared_ptr<Music> menuMusic = nullptr;                       // menu music
         std::shared_ptr<Sound> gameoverSound = nullptr;                   // game over sound

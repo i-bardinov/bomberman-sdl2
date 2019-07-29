@@ -16,7 +16,8 @@ namespace bomberman
         if(!animation.empty())
         {
             AnimationEntity entity = animation[0];
-            this->sprite->setClip(entity.width, entity.height, entity.positionX, entity.positionY);
+            this->sprite->setClip(static_cast<int>(entity.width), static_cast<int>(entity.height),
+                                  static_cast<int>(entity.positionX), static_cast<int>(entity.positionY));
         }
     }
 
@@ -57,7 +58,8 @@ namespace bomberman
             time = 0;
             AnimationEntity entity = animation[currentEntity];
             currentEntity = (currentEntity + 1) % animation.size();
-            sprite->setClip(entity.width, entity.height, entity.positionX, entity.positionY);
+            sprite->setClip(static_cast<int>(entity.width), static_cast<int>(entity.height),
+                            static_cast<int>(entity.positionX), static_cast<int>(entity.positionY));
         }
     }
 } // namespace bomberman

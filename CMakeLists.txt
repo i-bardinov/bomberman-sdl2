@@ -27,7 +27,7 @@ set(CMAKE_CXX_STANDARD 17)
 if(MSVC)
     add_compile_options(/std:c++17 /W3 /WX )
 else()
-    add_compile_options(-std=c++17 -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wunused -Wpedantic )
+    add_compile_options(-std=c++17 -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wunused -Wpedantic -pedantic-errors -Wconversion)
 endif()
 
 # Source code

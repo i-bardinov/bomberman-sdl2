@@ -13,9 +13,10 @@ namespace bomberman
         // stage text
         auto text = std::make_shared<Text>(game->getAssetManager()->getFont(), game->getRenderer(),
                                            "STAGE " + std::to_string(level));
-        text->setSize(game->getWindowWidth() / 3.0f, game->getWindowHeight() / 20.0f);
-        text->setPosition(game->getWindowWidth() / 2 - text->getWidth() / 2,
-                          game->getWindowHeight() / 2 - text->getHeight() / 2);
+        text->setSize(static_cast<int>(game->getWindowWidth() / 3.0f),
+                      static_cast<int>(game->getWindowHeight() / 20.0f));
+        text->setPosition(static_cast<int>(game->getWindowWidth() / 2.0f - text->getWidth() / 2.0f),
+                          static_cast<int>(game->getWindowHeight() / 2.0f - text->getHeight() / 2.0f));
         addObject(text);
     }
 

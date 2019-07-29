@@ -100,7 +100,7 @@ namespace bomberman
         const int newPositionDiffY = getPositionY() - newPositionY;
         const char signOfX = (newPositionDiffX > 0) ? 1 : ((newPositionDiffX < 0) ? -1 : 0);
         const char signOfY = (newPositionDiffY > 0) ? 1 : ((newPositionDiffY < 0) ? -1 : 0);
-        const float posDiff = static_cast<int>(floor((canAttack() ? attackSpeed : baseSpeed) * delta));
+        const int posDiff = static_cast<int>(floor((canAttack() ? attackSpeed : baseSpeed) * delta));
 
         prevPosDeltaX = posDiff * -signOfX;
         prevPosDeltaY = posDiff * -signOfY;
@@ -115,7 +115,8 @@ namespace bomberman
             return;
         }
         // move sprite to next tick pos
-        setPosition(getPositionX() - floor(posDiff) * signOfX, getPositionY() - floor(posDiff) * signOfY);
+        setPosition(getPositionX() - static_cast<int>(floor(posDiff)) * signOfX,
+                    getPositionY() - static_cast<int>(floor(posDiff)) * signOfY);
     }
 
     void Enemy::generateNewPath()

@@ -51,20 +51,23 @@ namespace bomberman
         auto background = std::make_shared<Sprite>(game->getAssetManager()->getTexture(Texture::MenuBack),
                                                    game->getRenderer());
         background->setPosition(30, 20);
-        background->setSize(game->getWindowWidth() - 60, game->getWindowHeight() / 1.5f - 20);
+        background->setSize(game->getWindowWidth() - 60,
+                            static_cast<int>(game->getWindowHeight() / 1.5f) - 20);
         addObject(background);
 
         // start menu
         startText = std::make_shared<Text>(game->getAssetManager()->getFont(), game->getRenderer(), "START");
         startText->setColor(colorPressed);
-        startText->setSize(game->getWindowWidth() / 4.0f, game->getWindowHeight() / 20.0f);
-        startText->setPosition(game->getWindowWidth() / 2 - startText->getWidth() / 2,
+        startText->setSize(static_cast<int>(game->getWindowWidth() / 4.0f),
+                           static_cast<int>(game->getWindowHeight() / 20.0f));
+        startText->setPosition(static_cast<int>(game->getWindowWidth() / 2.0f - startText->getWidth() / 2.0f),
                                background->getHeight() + 60);
         addObject(startText);
 
         // exit menu
         exitText = std::make_shared<Text>(game->getAssetManager()->getFont(), game->getRenderer(), "EXIT");
-        exitText->setSize(game->getWindowWidth() / 4.0f, game->getWindowHeight() / 20.0f);
+        exitText->setSize(static_cast<int>(game->getWindowWidth() / 4.0f),
+                          static_cast<int>(game->getWindowHeight() / 20.0f));
         exitText->setPosition(startText->getPositionX(),
                               startText->getPositionY() + exitText->getHeight() + 40);
         addObject(exitText);
