@@ -1,4 +1,5 @@
 #include <chrono>
+#include <functional>
 #include <random>
 
 #include "Const.h"

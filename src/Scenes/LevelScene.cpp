@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <chrono>
+#include <functional>
 #include <random>
 #include <string>
 
