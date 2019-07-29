@@ -2,7 +2,7 @@ version: '{branch}.{build}'
 image: Visual Studio 2017
 clone_depth: 1
 platform: 
-  - x64
+  - x86
 configuration:
   - Release
 cache:
@@ -11,7 +11,7 @@ cache:
 before_build:
   - |-
     set PREFIX=C:\usr
-    set ARCH=x64
+    set ARCH=x86
 
   # depends are only fetched where there's no cache
   - if exist %PREFIX% set DEPENDS=rem
