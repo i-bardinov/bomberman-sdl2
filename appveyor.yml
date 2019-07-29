@@ -38,10 +38,17 @@ before_build:
     %DEPENDS% copy SDL2_ttf-2.0.15\include\* %PREFIX%\include > nul
     %DEPENDS% copy SDL2_ttf-2.0.15\lib\%ARCH%\*.lib %PREFIX%\lib > nul
     %DEPENDS% copy SDL2_ttf-2.0.15\lib\%ARCH%\*.dll %PREFIX%\lib > nul
+ # SDL2_mixer
+  - |-
+    %DEPENDS% appveyor DownloadFile https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-devel-2.0.4-VC.zip
+    %DEPENDS% 7z x SDL2_mixer-devel-2.0.4-VC.zip > nul
+    %DEPENDS% copy SDL2_mixer-2.0.4\include\* %PREFIX%\include > nul
+    %DEPENDS% copy SDL2_mixer-2.0.4\lib\%ARCH%\*.lib %PREFIX%\lib > nul
+    %DEPENDS% copy SDL2_mixer-2.0.4\lib\%ARCH%\*.dll %PREFIX%\lib > nul
 
 build_script:
-- cmd: >-
-    md build && cd build
+  - |-
+    mkdir build && cd build
     cmake -G "Visual Studio 15 2017" ..
     cd ..
     cmake --build build --target install
