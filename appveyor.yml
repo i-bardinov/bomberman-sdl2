@@ -39,7 +39,7 @@ before_build:
     %DEPENDS% copy SDL2_ttf-2.0.15\lib\%ARCH%\*.a %PREFIX%\lib > nul
     %DEPENDS% copy SDL2_ttf-2.0.15\lib\%ARCH%\*.dll %PREFIX%\lib > nul
 
-    build_script:
+build_script:
 - cmd: >-
     md build && cd build
     cmake -G "Visual Studio 15 2017" ..
