@@ -99,7 +99,7 @@ namespace bomberman
         const int levelTimerStart = 200500;
         const int levelTimerUpdateText = 1000;
         const int bombTimerStart = 1500;
-        const int bangTimerStart = 1000;
+        const int bangTimerStart = 800;
         const int gameOverTimerStart = 1000;
         const int winTimerStart = 200;
         // const for score
