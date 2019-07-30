@@ -26,7 +26,7 @@ addons:
 
 script:
   - mkdir build && cd build
-  - cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../${REPO}
+  - cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../bomberman
   - cmake --build . --target install
 
 matrix:
@@ -35,6 +35,16 @@ matrix:
       os: linux
       dist: xenial
       compiler: gcc
+      before_deploy:
+        - cd ..
+        - tar -zcf ${REPO}-${TRAVIS_TAG}-${BUILD_ENV}.tar.gz bomberman
+      deploy:
+        provider: releases
+        api_key:
+          - secure: ${GITHUB_TOKEN}
+        file: ${REPO}-${TRAVIS_TAG}-${BUILD_ENV}.tar.gz
+        skip_cleanup: true
+        draft: true
     - name: "Linux clang"
       os: linux
       dist: xenial
@@ -44,7 +54,8 @@ matrix:
       osx_image: xcode10.2
       compiler: clang
       before_deploy:
-        - cd .. && tar -zcf ${REPO}-${TRAVIS_TAG}-${BUILD_ENV}.tar.gz ${REPO}
+        - cd ..
+        - tar -zcf ${REPO}-${TRAVIS_TAG}-${BUILD_ENV}.tar.gz bomberman
       deploy:
         provider: releases
         api_key:
