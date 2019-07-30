@@ -3,6 +3,9 @@ language: cpp
 notifications:
   email: false
 
+global:
+  secure: "gdq0qe3O7jeTDQTZ41y/GEvSkbvtNxhUQlDuWm5eMPk65L3qVQEZeVGwrbgpvSEsAIx9LZZ3dlpPqQGK1LSEc822TQ/6k5+ue+ncvh+gjLM1Q2MUgwLiSc2nmo5u14k6slSfaCcs6H5fkC837HG6fE/bevno7qJ5xADOvkPfVBhzL+FOkznBg0NTy3NUYrTeHw/XphLYrWXuQU0pROqsmOpi+Bj2szSaXiCHC4xdluazAIq9vxsumjMBj/HD9gyazr/avnOxuShjesguBV5KymGTvW81z2azVNnqnMgFH1Laam1s7v07oQoByC6HA7BQUbqhrOz5BUKGMkuaB1s1QMuHVbastqBbKx0W61nvQDpEd+nC/VrrqmtFlmcR0T0NCPKPT2VMFjuIz2uu3ZRZaRLoMsn9Mt9nSot22GnjvLJXQXCKvc4JmlUKt+HU5XbHHupgAl84NmXhBCsWKsFynQwQeib2SQpqAJGeRJRD4NIFfqMgMOdGSK3Y/QqNZ9kPNY70MOgQEp5MKu8MycScu1EXpJbr2rQLBK8n6QFVyGNST6mHpM4ZP2pMx0rDjCVH6r2EVfqu69MsaxPpnA/fpsOwUNOSaeybUHsb6rJeLop+p4qn6j+9MEph4gZVveDp3O8dbkRdtfFhMLB6NWJ4Bl0PwAbrtalR6U1Lkz4k6m4="
+
 addons:
   apt:
     packages:
@@ -23,7 +26,7 @@ addons:
 
 script:
   - mkdir build && cd build
-  - cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../install
+  - cmake .. -DCMAKE_BUILD_TYPE=Release $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX=../${REPO}
   - cmake --build . --target install
 
 matrix:
@@ -40,3 +43,14 @@ matrix:
       os: osx
       osx_image: xcode10.2
       compiler: clang
+      before_deploy:
+        - cd .. && tar -zcf ${REPO}-${TRAVIS_TAG}-${BUILD_ENV}.tar.gz ${REPO}
+      deploy:
+        provider: releases
+        api_key:
+          - secure: ${GITHUB_TOKEN}
+        file: ${REPO}-${TRAVIS_TAG}-${BUILD_ENV}.tar.gz
+        skip_cleanup: true
+        draft: true
+        on:
+          tags: true
