@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.12)
 
-project (bomberman VERSION 0.0.1)
+project (bomberman VERSION 1.0.0)
 
 message(STATUS "")
 message(STATUS "    == ${PROJECT_NAME} Project configuration ==")
