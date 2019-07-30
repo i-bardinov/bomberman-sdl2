@@ -53,4 +53,4 @@ matrix:
       skip_cleanup: true
       draft: true
       on:
-        tags: false
+        tags: true
