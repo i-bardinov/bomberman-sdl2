@@ -1,9 +1,9 @@
 # Bomberman
 
 ## Status:
-| Linux GCC | Linux Clang | MacOS |
-|-----------|-------------|-------|
-| [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/1)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/2)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/3)](https://travis-ci.org/i-bardinov/bomberman-sdl2) |
+| Linux GCC | Linux Clang | MacOS | Windows |
+|-----------|-------------|-------|---------|
+| [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/1)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/2)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/i-bardinov/bomberman-sdl2/branches/master/3)](https://travis-ci.org/i-bardinov/bomberman-sdl2) | [![Build status](https://ci.appveyor.com/api/projects/status/gdgocjy6th4sd4a5/branch/master?svg=true)](https://ci.appveyor.com/project/i-bardinov/bomberman-sdl2/branch/master) |
 
 ## Build:
 - Install `CMake, SDL2, SDL2_image, SDL2_ttf, SDL2_mixer`.

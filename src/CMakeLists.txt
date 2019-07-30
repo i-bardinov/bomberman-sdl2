@@ -52,11 +52,11 @@ target_link_libraries(
 # Install 
 install(
     TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION bin
+    RUNTIME DESTINATION .
 )
 
 # Resources
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../assets
-    DESTINATION bin
+    DESTINATION .
     OPTIONAL)
