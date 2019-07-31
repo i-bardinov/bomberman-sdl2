@@ -2,7 +2,7 @@ version: '{branch}.{build}'
 image: Visual Studio 2017
 clone_depth: 1
 platform: 
-  - x86
+  - x64
 configuration:
   - Release
 cache:
@@ -11,7 +11,7 @@ cache:
 before_build:
   - |-
     set PREFIX=C:\usr
-    set ARCH=x86
+    set ARCH=x64
 
   # depends are only fetched where there's no cache
   - if exist %PREFIX% set DEPENDS=rem
@@ -53,7 +53,7 @@ build_script:
   - |-
     cd %APPVEYOR_BUILD_FOLDER%
     mkdir build && cd build
-    cmake -DCMAKE_PREFIX_PATH="%PREFIX%" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=C:\bomberman -G "Visual Studio 15 2017" ..
+    cmake -DCMAKE_PREFIX_PATH="%PREFIX%" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=C:\bomberman -G "Visual Studio 15 2017" -A %ARCH% ..
     cd ..
     cmake --build build --target install
   # Add needed libs
@@ -77,7 +77,7 @@ build_script:
     copy %PREFIX%\lib\libvorbisfile-3.dll C:\bomberman
     copy %PREFIX%\lib\SDL2_mixer.dll C:\bomberman
   # Create package
-  - if "%APPVEYOR_REPO_TAG%"=="true" set PACKAGE=bomberman-%APPVEYOR_REPO_TAG_NAME%-win32.zip
+  - if "%APPVEYOR_REPO_TAG%"=="true" set PACKAGE=bomberman-%APPVEYOR_REPO_TAG_NAME%.zip
   - if "%APPVEYOR_REPO_TAG%"=="false" set PACKAGE=bomberman-%APPVEYOR_BUILD_VERSION%.zip
 
   - |-
