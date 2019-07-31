@@ -51,7 +51,7 @@ build_script:
   - |-
     cd %APPVEYOR_BUILD_FOLDER%
     mkdir build && cd build
-    cmake -DCMAKE_PREFIX_PATH="%PREFIX%" -CMAKE_WIN32_EXECUTABLE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=C:\bomberman -G "Visual Studio 15 2017" -A %ARCH% ..
+    cmake -DCMAKE_PREFIX_PATH="%PREFIX%" -DCMAKE_WIN32_EXECUTABLE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=C:\bomberman -G "Visual Studio 15 2017" -A %ARCH% ..
     cd ..
     cmake --build build --config Release --target install
   # Add needed libs
