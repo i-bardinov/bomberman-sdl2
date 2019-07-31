@@ -20,15 +20,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/)
 include(ConfigSafeGuards)
 
+# Set C++17
 set(CMAKE_CXX_STANDARD 17)
 
-#------------------------------------------------------------------------------
 # Enable helpfull warnings and c++17 for all files
 if(MSVC)
-    add_compile_options(/std:c++17 /Wall )
+    add_compile_options(/std:c++17 /W4 )
 else()
     add_compile_options(-std=c++17 -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wunused -Wpedantic -pedantic-errors -Wconversion)
 endif()
+
+#------------------------------------------------------------------------------
+# Project settings
 
 # Source code
 add_subdirectory(src)
