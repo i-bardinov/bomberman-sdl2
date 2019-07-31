@@ -64,6 +64,7 @@ matrix:
     before_deploy:
     - cd .. && cd ${REPO_NAME}
     - sudo mv ${REPO_NAME}.app ${REPO_NAME}-${TRAVIS_TAG}-macos.app
+    - sudo chown -R ${USER} ${REPO_NAME}-${TRAVIS_TAG}-macos.app/
     deploy:
       provider: releases
       api_key:
