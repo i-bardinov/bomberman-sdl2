@@ -75,8 +75,8 @@ build_script:
     copy %PREFIX%\lib\libvorbisfile-3.dll C:\bomberman
     copy %PREFIX%\lib\SDL2_mixer.dll C:\bomberman
   # Create package
-  - if "%APPVEYOR_REPO_TAG%"=="true" set PACKAGE=bomberman-%APPVEYOR_REPO_TAG_NAME%.zip
-  - if "%APPVEYOR_REPO_TAG%"=="false" set PACKAGE=bomberman-%APPVEYOR_BUILD_VERSION%.zip
+  - if "%APPVEYOR_REPO_TAG%"=="true" set PACKAGE=bomberman-%APPVEYOR_REPO_TAG_NAME%-win.zip
+  - if "%APPVEYOR_REPO_TAG%"=="false" set PACKAGE=bomberman-%APPVEYOR_BUILD_VERSION%-win.zip
 
   - |-
     cd C:\
