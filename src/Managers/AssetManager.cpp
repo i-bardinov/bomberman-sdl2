@@ -28,6 +28,7 @@ namespace bomberman
         loadSound(SoundEnum::Win, "assets/win.wav");
         loadSound(SoundEnum::Lose, "assets/lose.wav");
         loadSound(SoundEnum::Explosion, "assets/explosion.wav");
+        Mix_VolumeChunk(getSound(SoundEnum::Explosion).get(), 35);
     }
 
     std::shared_ptr<TTF_Font> AssetManager::getFont() const
