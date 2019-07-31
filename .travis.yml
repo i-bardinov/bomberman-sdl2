@@ -23,21 +23,24 @@ addons:
     - sdl2_ttf
     - sdl2_mixer
 
-script:
-- mkdir build && cd build
-- cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_BUNDLE=ON -DCMAKE_INSTALL_PREFIX=../${REPO_NAME}
-- cmake --build . --target install --config Release
-
 matrix:
   include:
   - name: Linux gcc
     os: linux
     dist: xenial
     compiler: gcc
+    script:
+    - mkdir build && cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../${REPO_NAME}
+    - cmake --build . --target install --config Release
   - name: Linux clang
     os: linux
     dist: xenial
     compiler: clang
+    script:
+    - mkdir build && cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../${REPO_NAME}
+    - cmake --build . --target install --config Release
     before_deploy:
     - cd ..
     - tar -zcf ${REPO_NAME}-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz ${REPO_NAME}
@@ -54,6 +57,10 @@ matrix:
     os: osx
     osx_image: xcode10.2
     compiler: clang
+    script:
+    - mkdir build && cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_BUNDLE=ON -DCMAKE_INSTALL_PREFIX=../${REPO_NAME}
+    - sudo cmake --build . --target install --config Release
     before_deploy:
     - cd .. && cd ${REPO_NAME}
     - mv ${REPO_NAME}.app ${REPO_NAME}-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.app
