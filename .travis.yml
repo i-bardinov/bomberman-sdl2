@@ -62,9 +62,10 @@ matrix:
     - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_MACOSX_BUNDLE=ON -DCMAKE_INSTALL_PREFIX=../${REPO_NAME}
     - sudo cmake --build . --target install --config Release
     before_deploy:
-    - cd .. && cd ${REPO_NAME}
+    - cd ..
+    - sudo chown -R ${USER} ${REPO_NAME}
+    - cd ${REPO_NAME}
     - sudo mv ${REPO_NAME}.app ${REPO_NAME}-${TRAVIS_TAG}-macos.app
-    - sudo chown -R ${USER} ${REPO_NAME}-${TRAVIS_TAG}-macos.app/
     deploy:
       provider: releases
       api_key:
