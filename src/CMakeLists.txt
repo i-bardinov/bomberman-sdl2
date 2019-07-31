@@ -37,7 +37,22 @@ set(
     ${CMAKE_CURRENT_SOURCE_DIR}/Util/Pathfinding.cpp
 )
 
-add_executable(${PROJECT_NAME}
+# MacOS bundle parameters
+if (CMAKE_MACOSX_BUNDLE)
+    set(MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME})
+    set(MACOSX_BUNDLE_GUI_IDENTIFIER "io.github.ibardinov.${PROJECT_NAME}")
+    set(MACOSX_BUNDLE_INFO_STRING "Super Arcade Bang Bang")
+    set(MACOSX_BUNDLE_ICON_FILE "icon.icns")
+    set(MACOSX_BUNDLE_LONG_VERSION_STRING ${PROJECT_VERSION})
+    set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION})
+    set(MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION})
+    set(MACOSX_BUNDLE_COPYRIGHT "Ilia Bardinov (c) 2019")
+    set(APP_ICON ${CMAKE_CURRENT_SOURCE_DIR}/../icons/icon.icns)
+    set_source_files_properties(${APP_ICON} PROPERTIES
+       MACOSX_PACKAGE_LOCATION "Resources")
+endif()
+
+add_executable(${PROJECT_NAME} ${APP_ICON}
     ${SOURCES}
 )
 
@@ -50,13 +65,19 @@ target_link_libraries(
 )
 
 # Install 
-install(
-    TARGETS ${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION .
+    BUNDLE DESTINATION .
 )
-
 # Resources
-install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../assets
-    DESTINATION .
-    OPTIONAL)
+if (CMAKE_MACOSX_BUNDLE)
+    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../assets DESTINATION ${PROJECT_NAME}.app/Contents/Resources )
+else(CMAKE_MACOSX_BUNDLE)
+    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../assets DESTINATION . )
+endif(CMAKE_MACOSX_BUNDLE)
+
+# fix dylib
+if (CMAKE_MACOSX_BUNDLE)
+    install(CODE "include(BundleUtilities)
+        fixup_bundle(\"${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}.app\" \"\" \"${CMAKE_BINARY_DIR}\")")
+endif()
