@@ -65,12 +65,12 @@ matrix:
     - cd ..
     - sudo chown -R ${USER} ${REPO_NAME}
     - cd ${REPO_NAME}
-    - sudo mv ${REPO_NAME}.app ${REPO_NAME}-${TRAVIS_TAG}-macos.app
+    - tar -zcf ${REPO_NAME}-${TRAVIS_TAG}-macos.tar.gz ${REPO_NAME}.app
     deploy:
       provider: releases
       api_key:
         secure: cCuIByjKr0XMwtowOpjCSL8Cd+mjtaA3a3T/z6v44xrwIObEnnG8LgENUHoSjpaF5QiAieaaYoOG9hputgNXnqZZPVvPWwQOwfZ7zMZGj4GO/V23auvti3mRJ9jDA5fojqkp+shMhmtYdPNETF4TDNvUUumE1tfC/vVU2ODxnq+mlJmQOiSVY7+oDQ+YM3QbLsexBhHZ6I1IGSGcvYW2Br1vI3qbNcvuLwjpK3NnV0SYenVWVM23qXmonL7uLwGsrukrq2xfc21vQr/IW3e+0w4gOkVs/0FBDS9fev9+fLCyosDxO5urvPOejR3wooMGyZbNA7phInf2lJqGs7bLa7GN4eV7B0x6AuwUEoYo9XE9UY0Tat0uMMzmGMmDXPthKWUiA8yHCsa0Ahv6OR/pr+Vfh/kH8T5SJBCcZE3wUI3RA6jiIAkjSBoRh8LAgRoGiLqHJDCGe738c+Yix2Y4AarK6VYuGSUMGLr+kd+9H/tIYOGCl1ZWaj3Nrob5d2gWdcfHBHA0Vv8Ialz5aKlPDKXe4ze8aHPFDNLGchUYD7ZWRQmTvNraTkgu2GDtTbPyRAVmbIjmDBmO9s+mh8sI3gQvBXdrAoSzRp1KbHx9fuOdXyPt2m+Ec/NE5ScdZUkQLBeWsOkuOAjtZi3FQnwUNDD4Zt37Dw803SbjsSzmmDE=
-      file: "${REPO_NAME}-${TRAVIS_TAG}-macos.app"
+      file: "${REPO_NAME}-${TRAVIS_TAG}-macos.tar.gz"
       skip_cleanup: true
       draft: true
       on:
