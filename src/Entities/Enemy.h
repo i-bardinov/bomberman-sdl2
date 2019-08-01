@@ -95,9 +95,9 @@ namespace bomberman
         // AI
         AIType aiType = AIType::Wandering; // AI type
         // consts
-        const float baseSpeed = 0.06f;   // speed of enemy
-        const float attackSpeed = 0.09f; // speed of attack enemy
-        const int attackRadius = 4;      // attack radius (in cells)
+        const float baseSpeed = 0.0018f;    // speed of enemy
+        const float attackSpeed = 0.0025f;   // speed of attack enemy
+        const int attackRadius = 4;         // attack radius (in cells)
         // animations
         std::shared_ptr<Animation> movement; // movement animation
     };

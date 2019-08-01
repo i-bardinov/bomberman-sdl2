@@ -46,7 +46,7 @@ namespace bomberman
         // movement
         if(isMoving())
         {
-            const int posDiff = static_cast<int>(floor(speed * delta));
+            const int posDiff = static_cast<int>(floor(speed * delta * getWidth()));
             prevPosDeltaX =
                 posDiff *
                 (isMovingHorizontally() ? (movementDirection == MovementDirection::Left ? -1 : 1) : 0);

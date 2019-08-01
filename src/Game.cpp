@@ -43,7 +43,7 @@ namespace bomberman
 
         // create a window
         window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                  windowWidth, windowHeight, SDL_WINDOW_SHOWN);
+                                  windowWidth, windowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
         if(!window)
         {
             std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
@@ -57,6 +57,12 @@ namespace bomberman
             std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
             return;
         }
+
+        // we need new size due to possible high resolution on mac and ios
+        int w, h;
+        SDL_GetRendererOutputSize(renderer, &w, &h);
+        windowWidth = w;
+        windowHeight = h;
 
         assetManager = new AssetManager();
         sceneManager = new SceneManager();

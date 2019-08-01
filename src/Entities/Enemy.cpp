@@ -100,7 +100,7 @@ namespace bomberman
         const int newPositionDiffY = getPositionY() - newPositionY;
         const char signOfX = (newPositionDiffX > 0) ? 1 : ((newPositionDiffX < 0) ? -1 : 0);
         const char signOfY = (newPositionDiffY > 0) ? 1 : ((newPositionDiffY < 0) ? -1 : 0);
-        const int posDiff = static_cast<int>(floor((canAttack() ? attackSpeed : baseSpeed) * delta));
+        const int posDiff = static_cast<int>(floor((canAttack() ? attackSpeed : baseSpeed) * delta * getWidth()));
 
         prevPosDeltaX = posDiff * -signOfX;
         prevPosDeltaY = posDiff * -signOfY;
